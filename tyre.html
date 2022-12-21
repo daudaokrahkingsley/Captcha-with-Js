@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <style>
+      #image {
+        margin-top: 10px;
+        width: 60px;
+        padding: 20px;
+        height: 40px;
+        user-select: none;
+        text-decoration: line-through;
+        font-size: x-large;
+        font-style: italic;
+        border: red;
+        margin-left: 10px;
+      }
+    </style>
+  </head>
+  <body onload="generate()">
+    <div id="user-input" class="inline">
+      <input type="text" id="submit" placeholder="Captcha code" />
+    </div>
+
+    <div class="inline" onclick="generate()"></div>
+
+    <div
+      id="image"
+      class="inline"
+      style="color: red; font-weight: bolder"
+    ></div>
+
+    <input type="submit" id="btn" onclick="printmsg()" />
+
+    <p id="key"></p>
+  </body>
+
+  <script>
+    var Captcha;
+
+    function generate() {
+      document.getElementById("submit").value = "";
+
+      Captcha = document.getElementById("image");
+      var uniquechar = "";
+
+      const randomchar = "odk1234567890";
+
+      for (let i = 1; i < 5; i++) {
+        uniquechar += randomchar.charAt(Math.random() * randomchar.length);
+      }
+
+      Captcha.innerHTML = uniquechar;
+    }
+
+    function printmsg() {
+      const user_input = document.getElementById("submit").value;
+
+      if (user_input == Captcha.innerHTML) {
+        var s = (document.getElementById("key").innerHTML = "matched");
+        generate();
+      } else {
+        var s = (document.getElementById("key").innerHTML = "not matched");
+
+        generate();
+      }
+    }
+  </script>
+</html>
